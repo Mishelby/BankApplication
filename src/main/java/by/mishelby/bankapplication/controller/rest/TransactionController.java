@@ -6,6 +6,7 @@ import by.mishelby.bankapplication.model.dto.TransactionUpdateDTO;
 import by.mishelby.bankapplication.mapper.TransactionMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.Collection;
 
+@Slf4j
 @RestController("transactionRestController")
 @RequestMapping("/api")
 @RequiredArgsConstructor
