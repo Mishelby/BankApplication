@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "firstName": "Paul",
+    "middleName": "Fork",
+    "lastName": "Models",
+    "birthDate": "2000-12-12",
+    "bankAccounts": [
+      {
+        "balance": null,
+        "ownerId": 1,
+        "transactions": []
+      }
+    ]
+  }
+]

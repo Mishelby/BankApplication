@@ -1,0 +1,4 @@
+{
+  "message": "Cannot invoke \"by.mishelby.bankapplication.model.user.User.getId()\" because the return value of \"by.mishelby.bankapplication.model.bankAccount.BankAccount.getOwner()\" is null",
+  "timestamp": 1725996858831
+}

@@ -1,0 +1,4 @@
+{
+  "message": "PreparedStatementCallback; bad SQL grammar [SELECT b.account_id, b.balance, b.owner_id, t.transaction_id, t.account_id, t.value, t.category, t.created_date, t.type  FROM bank_repository.bank_account b  LEFT JOIN bank_repository.transactions t ON b.account_id = t.account_id WHERE account_id = ?]",
+  "timestamp": 1725998802496
+}

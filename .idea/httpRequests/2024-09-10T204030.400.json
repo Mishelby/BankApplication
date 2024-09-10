@@ -1,0 +1,4 @@
+{
+  "message": "StatementCallback; bad SQL grammar [SELECT u.user_id, u.first_name, u.middle_name, u.last_name, u.birth_date, array_agg(ba.account_id) as account_ids FROM users u LEFT JOIN bank_account ba ON u.user_id = ba.owner_id GROUP BY u.user_id, u.first_name, u.middle_name, u.last_name, u.birth_date]",
+  "timestamp": 1725990030838
+}

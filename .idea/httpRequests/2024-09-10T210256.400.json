@@ -1,0 +1,4 @@
+{
+  "message": "StatementCallback; bad SQL grammar [SELECT u.user_id, u.first_name, u.middle_name, u.last_name, u.birth_date FROM users u LEFT JOIN bank_account ba ON u.user_id = ba.owner_id ]",
+  "timestamp": 1725991376935
+}

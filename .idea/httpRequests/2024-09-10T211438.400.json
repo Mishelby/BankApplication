@@ -1,0 +1,4 @@
+{
+  "message": "Cannot invoke \"java.util.List.stream()\" because the return value of \"by.mishelby.bankapplication.model.user.User.getBankAccounts()\" is null",
+  "timestamp": 1725992078461
+}

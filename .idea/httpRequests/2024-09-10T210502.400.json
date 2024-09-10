@@ -1,0 +1,4 @@
+{
+  "message": "StatementCallback; bad SQL grammar [SELECT u.user_id, u.first_name, u.middle_name, u.last_name, u.birth_date FROM users u ]",
+  "timestamp": 1725991502556
+}
