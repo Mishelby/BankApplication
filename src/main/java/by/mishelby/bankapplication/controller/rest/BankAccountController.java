@@ -1,10 +1,10 @@
 package by.mishelby.bankapplication.controller.rest;
 
-import by.mishelby.bankapplication.mapper.BankAccountMapper;
+import by.mishelby.bankapplication.mapper.BankAccountMapper.BankAccountMapper;
+import by.mishelby.bankapplication.mapper.BankAccountMapper.BankAccountMapperMain;
 import by.mishelby.bankapplication.model.bankAccount.BankAccount;
-import by.mishelby.bankapplication.model.dto.BankAccountDTO;
+import by.mishelby.bankapplication.model.dto.BankAccountDTO.BankAccountDTO;
 import by.mishelby.bankapplication.repository.BankAccountRepositoryImpl;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,28 +21,28 @@ import java.util.*;
 @RequiredArgsConstructor
 public class BankAccountController {
     private final BankAccountRepositoryImpl bankAccountRepository;
+    private final BankAccountMapperMain bankAccountMapperMain;
     private final BankAccountMapper bankAccountMapper;
+
 
     @GetMapping("/accounts")
     public Iterable<BankAccountDTO> getAllAccounts() {
         Collection<BankAccount> bankAccountsList = bankAccountRepository.findAll();
         return bankAccountsList
                 .stream()
-                .map(bankAccountMapper::toDTO)
+                .map(bankAccountMapperMain::toDTO)
                 .toList();
     }
 
     @GetMapping("/account/{id}")
-    public ResponseEntity<BankAccountDTO> getById(@PathVariable Long id) {
+    public BankAccountDTO getById(@PathVariable Long id) {
         var bankAccount = bankAccountRepository.findById(id);
-        return ResponseEntity.ok().body(
-                bankAccountMapper.toDTO(bankAccount)
-        );
+        return bankAccountMapper.toDTO(bankAccount);
     }
 
     @PostMapping("/account/{id}")
     public ResponseEntity<BankAccountDTO> create(@PathVariable("id") Long id) {
-        var bankAccount = bankAccountRepository.createBankAccount(id);
+        var bankAccount = bankAccountRepository.save(id);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -51,7 +51,7 @@ public class BankAccountController {
                 .toUri();
 
         return ResponseEntity.created(location).body(
-                bankAccountMapper.toDTO(bankAccount)
+                bankAccountMapperMain.toDTO(bankAccount)
         );
     }
 

@@ -1,7 +1,6 @@
 package by.mishelby.bankapplication.repository;
 
-import by.mishelby.bankapplication.mapper.BankAccountMapper;
-import by.mishelby.bankapplication.mapper.BankAccountMapperClass;
+import by.mishelby.bankapplication.mapper.BankAccountMapper.BankAccountMapperClass;
 import by.mishelby.bankapplication.model.bankAccount.BankAccount;
 
 import by.mishelby.bankapplication.service.exceptions.ResourceNotFoundException;
@@ -10,13 +9,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 
 @Slf4j
@@ -40,9 +40,9 @@ public class BankAccountRepositoryImpl implements BankAccountRepository {
     @Override
     @Transactional(readOnly = true)
     public BankAccount findById(Long id) {
-        var sql = "SELECT b.account_id, b.balance, b.owner_id, t.transaction_id, t.account_id, t.value, t.category, t.created_date, t.type " +
-                " FROM bank_repository.bank_account b " +
-                " LEFT JOIN bank_repository.transactions t ON b.account_id = t.account_id WHERE account_id = :id";
+        var sql = "SELECT b.account_id, b.balance, b.owner_id " +
+                "FROM bank_repository.bank_account b " +
+                "WHERE account_id = :id";
 
         var params = new MapSqlParameterSource()
                 .addValue("id", id);
@@ -55,8 +55,11 @@ public class BankAccountRepositoryImpl implements BankAccountRepository {
 
     @Override
     @Transactional
-    public BankAccount createBankAccount(Long userId) {
+    public BankAccount save(Long userId) {
         var user = userRepository.findById(userId);
+        if (user.getBankAccounts() == null) {
+            user.setBankAccounts(new ArrayList<>());
+        }
         var sql = "INSERT INTO bank_repository.bank_account(owner_id, balance) VALUES (:ownerId, :balance)";
 
         var params = new MapSqlParameterSource()
@@ -70,7 +73,10 @@ public class BankAccountRepositoryImpl implements BankAccountRepository {
             throw new ResourceNotFoundException("Failed to get bank account key");
         }
 
-        return new BankAccount(key.longValue(), user);
+        var bankAccount = new BankAccount(key.longValue(), user);
+        user.getBankAccounts().add(bankAccount);
+
+        return bankAccount;
     }
 
     @Override

@@ -1,9 +1,9 @@
 package by.mishelby.bankapplication.repository;
 
-import by.mishelby.bankapplication.mapper.UserMapper;
-import by.mishelby.bankapplication.mapper.UserMapperClass;
-import by.mishelby.bankapplication.model.dto.UserCreateDTO;
-import by.mishelby.bankapplication.model.dto.UserUpdatedDTO;
+import by.mishelby.bankapplication.mapper.UserMapper.UserMapper;
+import by.mishelby.bankapplication.mapper.UserMapper.UserMapperClass;
+import by.mishelby.bankapplication.model.dto.UserDTO.UserCreateDTO;
+import by.mishelby.bankapplication.model.dto.UserDTO.UserUpdatedDTO;
 import by.mishelby.bankapplication.model.user.User;
 import by.mishelby.bankapplication.service.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -31,17 +31,17 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     @Transactional(readOnly = true)
     public Collection<User> findAll() {
-        var sql = "SELECT u.user_id, u.first_name, u.middle_name, u.last_name, u.birth_date, ba.account_id, ba.owner_id, ba.balance" +
-                "  FROM bank_repository.users u LEFT JOIN bank_repository.bank_account ba ON u.user_id = ba.owner_id";
+        var sql = "SELECT u.user_id, u.first_name, u.middle_name, u.last_name, u.birth_date, ba.account_id, ba.balance " +
+                "FROM bank_repository.users u LEFT JOIN bank_repository.bank_account ba ON ba.owner_id = u.user_id";
         return jdbcTemplate.query(sql, new UserMapperClass());
     }
 
     @Override
     @Transactional(readOnly = true)
     public User findById(Long id) {
-        var sql = "SELECT user_id, first_name, middle_name, last_name, birth_date, ba.account_id, ba.owner_id, ba.balance" +
-                " FROM bank_repository.users u LEFT JOIN bank_repository.bank_account ba on u.user_id = ba.owner_id " +
-                "WHERE user_id = :id";
+        var sql = "SELECT u.user_id, u.first_name, u.middle_name, u.last_name, u.birth_date, ba.account_id, ba.balance " +
+                "FROM bank_repository.users u LEFT JOIN bank_repository.bank_account ba ON ba.owner_id = u.user_id " +
+                "WHERE u.user_id = :id";
 
         var params = new MapSqlParameterSource()
                 .addValue("id", id);
@@ -54,7 +54,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     @Transactional
-    public User create(UserCreateDTO userCreateDTO) {
+    public User save(UserCreateDTO userCreateDTO) {
         var sql = "INSERT INTO bank_repository.users (first_name, middle_name, last_name, birth_date) values (:firstName, :middleName, :lastName, :birthDate)";
 
         var params = getMapSqlParameterSource(userCreateDTO);

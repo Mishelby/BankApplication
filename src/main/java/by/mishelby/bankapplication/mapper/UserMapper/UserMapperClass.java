@@ -1,13 +1,13 @@
-package by.mishelby.bankapplication.mapper;
-
-import by.mishelby.bankapplication.model.bankAccount.BankAccount;
-import by.mishelby.bankapplication.model.user.User;
-import org.springframework.jdbc.core.RowMapper;
+package by.mishelby.bankapplication.mapper.UserMapper;
 
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import by.mishelby.bankapplication.model.bankAccount.BankAccount;
+import by.mishelby.bankapplication.model.user.User;
+import org.springframework.jdbc.core.RowMapper;
 
 public class UserMapperClass implements RowMapper<User> {
 
@@ -21,15 +21,18 @@ public class UserMapperClass implements RowMapper<User> {
         user.setBirthDate(rs.getDate("birth_date").toLocalDate());
         user.setBankAccounts(new ArrayList<>());
 
-        Long accountId = rs.getLong("account_id");
-        if (accountId != null) {
-            var bankAccount = new BankAccount();
-            bankAccount.setId(accountId);
-            bankAccount.setOwner(user);
-            bankAccount.setBalance(rs.getBigDecimal("balance"));
-            user.getBankAccounts().add(bankAccount);
+        long accountId = rs.getLong("account_id");
+
+        if (accountId > 0) {
+            var account = new BankAccount();
+            account.setId(accountId);
+            account.setOwner(user);
+            account.setBalance(rs.getBigDecimal("balance"));
+            user.getBankAccounts().add(account);
         }
+
 
         return user;
     }
 }
+

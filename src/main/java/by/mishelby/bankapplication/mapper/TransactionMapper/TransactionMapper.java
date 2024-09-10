@@ -1,8 +1,8 @@
-package by.mishelby.bankapplication.mapper;
+package by.mishelby.bankapplication.mapper.TransactionMapper;
 
-import by.mishelby.bankapplication.model.dto.TransactionCreateDTO;
-import by.mishelby.bankapplication.model.dto.TransactionDTO;
-import by.mishelby.bankapplication.model.dto.TransactionUpdateDTO;
+import by.mishelby.bankapplication.model.dto.TransactionDTO.TransactionCreateDTO;
+import by.mishelby.bankapplication.model.dto.TransactionDTO.TransactionDTO;
+import by.mishelby.bankapplication.model.dto.TransactionDTO.TransactionUpdateDTO;
 import by.mishelby.bankapplication.model.transaction.Transaction;
 import org.mapstruct.Mapper;
 

@@ -11,7 +11,7 @@ public interface BankAccountRepository {
 
     BankAccount findById(Long id);
 
-    BankAccount createBankAccount(Long userId);
+    BankAccount save(Long userId);
 
     void deleteBankAccount(Long id);
 }

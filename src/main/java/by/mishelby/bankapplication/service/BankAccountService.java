@@ -1,8 +1,8 @@
 package by.mishelby.bankapplication.service;
 
-import by.mishelby.bankapplication.model.dto.BankAccountAmount;
-import by.mishelby.bankapplication.model.dto.BankAccountDTO;
-import by.mishelby.bankapplication.model.dto.BankAccountTransferDTO;
+import by.mishelby.bankapplication.model.dto.BankAccountDTO.BankAccountAmount;
+import by.mishelby.bankapplication.model.dto.BankAccountDTO.BankAccountDTO;
+import by.mishelby.bankapplication.model.dto.BankAccountDTO.BankAccountTransferDTO;
 import by.mishelby.bankapplication.model.transaction.Transaction;
 
 

@@ -25,7 +25,6 @@ public class Transaction {
     private TransactionType type;
 
     @ToString.Exclude
-    @JsonBackReference
     private BankAccount bankAccount;
 
     private String category;

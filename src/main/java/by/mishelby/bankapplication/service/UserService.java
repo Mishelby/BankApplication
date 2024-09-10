@@ -1,7 +1,7 @@
 package by.mishelby.bankapplication.service;
 
-import by.mishelby.bankapplication.model.dto.*;
-import by.mishelby.bankapplication.model.transaction.Transaction;
+import by.mishelby.bankapplication.model.dto.UserDTO.UserCreateDTO;
+import by.mishelby.bankapplication.model.dto.UserDTO.UserUpdatedDTO;
 import by.mishelby.bankapplication.model.user.User;
 
 import java.util.Collection;

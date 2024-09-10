@@ -1,9 +1,10 @@
 package by.mishelby.bankapplication.controller.rest;
 
-import by.mishelby.bankapplication.mapper.UserMapper;
-import by.mishelby.bankapplication.model.dto.UserCreateDTO;
-import by.mishelby.bankapplication.model.dto.UserDTO;
-import by.mishelby.bankapplication.model.dto.UserUpdatedDTO;
+import by.mishelby.bankapplication.mapper.UserMapper.UserMapper;
+import by.mishelby.bankapplication.mapper.UserMapper.UserMapperMain;
+import by.mishelby.bankapplication.model.dto.UserDTO.UserCreateDTO;
+import by.mishelby.bankapplication.model.dto.UserDTO.UserDTO;
+import by.mishelby.bankapplication.model.dto.UserDTO.UserUpdatedDTO;
 import by.mishelby.bankapplication.model.user.User;
 import by.mishelby.bankapplication.repository.UserRepositoryImpl;
 import jakarta.validation.Valid;
@@ -23,27 +24,29 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class UserController {
     private final UserRepositoryImpl userRepository;
+    private final UserMapperMain userMapperMain;
     private final UserMapper userMapper;
 
     @GetMapping("/users")
     public Iterable<UserDTO> getAllUsers() {
         Collection<User> userList = userRepository.findAll();
+
         return userList
                 .stream()
-                .map(userMapper::toDTO)
+                .map(userMapperMain::toUserDTO)
                 .toList();
     }
 
     @GetMapping("/user/{id}")
     public UserDTO getUserById(@PathVariable Long id) {
         var user = userRepository.findById(id);
-        return userMapper.toDTO(user);
+        return userMapperMain.toUserDTO(user);
     }
 
     @PostMapping("/user")
     public ResponseEntity<UserDTO> createUser(@RequestBody @Valid UserCreateDTO userCreateDTO) {
 
-        var user = userRepository.create(userCreateDTO);
+        var user = userRepository.save(userCreateDTO);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

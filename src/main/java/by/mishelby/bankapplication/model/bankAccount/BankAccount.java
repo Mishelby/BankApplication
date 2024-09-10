@@ -11,6 +11,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -18,26 +19,21 @@ import java.util.List;
 
 
 @Data
+@NoArgsConstructor
 public class BankAccount {
     private Long id;
 
     private BigDecimal balance;
 
-    @JsonIgnoreProperties
+    @ToString.Exclude
     private User owner;
 
-    @JsonIgnoreProperties
+    @ToString.Exclude
     private List<Transaction> transactions;
-
-    public BankAccount() {
-        this.transactions = new ArrayList<>();
-        this.balance = BigDecimal.ZERO;
-    }
 
     public BankAccount(Long id, User owner) {
         this.id = id;
         this.balance = BigDecimal.ZERO;
         this.owner = owner;
-        this.transactions = new ArrayList<>();
     }
 }

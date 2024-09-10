@@ -1,4 +1,4 @@
-package by.mishelby.bankapplication.mapper;
+package by.mishelby.bankapplication.mapper.BankAccountMapper;
 
 import by.mishelby.bankapplication.model.bankAccount.BankAccount;
 import by.mishelby.bankapplication.model.user.User;

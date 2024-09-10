@@ -1,8 +1,8 @@
-package by.mishelby.bankapplication.mapper;
+package by.mishelby.bankapplication.mapper.UserMapper;
 
-import by.mishelby.bankapplication.model.dto.UserCreateDTO;
-import by.mishelby.bankapplication.model.dto.UserDTO;
-import by.mishelby.bankapplication.model.dto.UserUpdatedDTO;
+import by.mishelby.bankapplication.model.dto.UserDTO.UserCreateDTO;
+import by.mishelby.bankapplication.model.dto.UserDTO.UserDTO;
+import by.mishelby.bankapplication.model.dto.UserDTO.UserUpdatedDTO;
 import by.mishelby.bankapplication.model.user.User;
 import org.mapstruct.Mapper;
 

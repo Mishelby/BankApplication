@@ -1,4 +1,4 @@
-package by.mishelby.bankapplication.model.dto;
+package by.mishelby.bankapplication.model.dto.TransactionDTO;
 
 import by.mishelby.bankapplication.model.transaction.TransactionType;
 import jakarta.persistence.*;

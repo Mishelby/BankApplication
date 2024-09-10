@@ -1,8 +1,8 @@
 package by.mishelby.bankapplication.repository;
 
-import by.mishelby.bankapplication.mapper.TransactionMapperClass;
-import by.mishelby.bankapplication.model.dto.TransactionCreateDTO;
-import by.mishelby.bankapplication.model.dto.TransactionUpdateDTO;
+import by.mishelby.bankapplication.mapper.TransactionMapper.TransactionMapperClass;
+import by.mishelby.bankapplication.model.dto.TransactionDTO.TransactionCreateDTO;
+import by.mishelby.bankapplication.model.dto.TransactionDTO.TransactionUpdateDTO;
 import by.mishelby.bankapplication.model.transaction.Transaction;
 import by.mishelby.bankapplication.service.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;

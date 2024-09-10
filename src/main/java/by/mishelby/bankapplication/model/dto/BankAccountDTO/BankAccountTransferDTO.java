@@ -1,4 +1,4 @@
-package by.mishelby.bankapplication.model.dto;
+package by.mishelby.bankapplication.model.dto.BankAccountDTO;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

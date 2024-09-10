@@ -1,4 +1,4 @@
-package by.mishelby.bankapplication.model.dto;
+package by.mishelby.bankapplication.model.dto.TransactionDTO;
 
 import by.mishelby.bankapplication.model.transaction.TransactionType;
 import jakarta.validation.constraints.NotNull;
@@ -8,7 +8,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class TransactionUpdateDTO {
+public class TransactionCreateDTO {
     @NotNull(message = "Transaction value cannot be null")
     @Positive(message = "Transaction value must be positive")
     private BigDecimal value;

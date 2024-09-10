@@ -1,18 +1,13 @@
 package by.mishelby.bankapplication.controller.rest;
 
-import by.mishelby.bankapplication.model.dto.TransactionCreateDTO;
-import by.mishelby.bankapplication.model.dto.TransactionDTO;
-import by.mishelby.bankapplication.model.dto.TransactionUpdateDTO;
-import by.mishelby.bankapplication.mapper.TransactionMapper;
-import jakarta.validation.Valid;
+import by.mishelby.bankapplication.mapper.TransactionMapper.TransactionMapper;
+import by.mishelby.bankapplication.model.dto.TransactionDTO.TransactionDTO;
+import by.mishelby.bankapplication.model.transaction.Transaction;
+import by.mishelby.bankapplication.repository.TransactionRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.Collection;
 
 @Slf4j
@@ -20,25 +15,25 @@ import java.util.Collection;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class TransactionController {
-//    private final TransactionServiceImpl transactionService;
-//    private final TransactionMapper transactionMapper;
-//
-//    @GetMapping("/transactions")
-//    public ResponseEntity<Iterable<TransactionDTO>> getAllTransactions() {
-//        Collection<TransactionDTO> transactions = transactionService.findAll();
-//        if (transactions.isEmpty()) {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//        return ResponseEntity.ok().body(transactions);
-//    }
-//
-//    @GetMapping("/transaction/{id}")
-//    public ResponseEntity<TransactionDTO> getTransactionById(@PathVariable("id") int id) {
-//        var transaction = transactionService.findById(id);
-//        return ResponseEntity.ok().body(transaction);
-//    }
-//
+    private final TransactionRepositoryImpl transactionRepository;
+    private final TransactionMapper transactionMapper;
+
+    @GetMapping("/transactions")
+    public Iterable<TransactionDTO> getAllTransactions() {
+        Collection<Transaction> transactions = transactionRepository.findAll();
+
+        return transactions
+                .stream()
+                .map(transactionMapper::toDTO)
+                .toList();
+    }
+
+    @GetMapping("/transaction/{id}")
+    public TransactionDTO getTransactionById(@PathVariable("id") Long id) {
+        var transaction = transactionRepository.findById(id);
+        return transactionMapper.toDTO(transaction);
+    }
+
 //    @PostMapping("/transaction")
 //    public ResponseEntity<TransactionDTO> createTransaction(@RequestBody @Valid TransactionCreateDTO transactionCreateDTO) {
 //        var transaction = transactionService.create(transactionCreateDTO);
